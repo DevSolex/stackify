@@ -334,12 +334,47 @@
         ;; Refund STX from contract back to creator
         (try! (as-contract (stx-transfer? (get amount task) tx-sender (get creator task))))
 
-        ;; Emit event
         (print {
             event: "cancelled",
             id: id,
             creator: tx-sender,
             amount: (get amount task),
+        })
+
+        (ok true)
+    )
+)
+
+;; @desc Increase the reward amount of an open task
+;; @param id uint - Task ID
+;; @param add-amount uint - Additional micro-STX to add
+(define-public (increase-task-reward (id uint) (add-amount uint))
+    (let ((task (unwrap! (map-get? Tasks id) ERR-INVALID-ID)))
+        ;; Check that sender is the creator
+        (asserts! (is-eq tx-sender (get creator task)) ERR-NOT-CREATOR)
+
+        ;; Check that task is open
+        (asserts! (is-eq (get status task) "open") ERR-NOT-OPEN)
+
+        ;; Check amount is positive
+        (asserts! (> add-amount u0) ERR-ZERO-AMOUNT)
+
+        ;; Transfer additional STX from creator to contract
+        (try! (stx-transfer? add-amount tx-sender (as-contract tx-sender)))
+
+        ;; Update task
+        (map-set Tasks id
+            (merge task {
+                amount: (+ (get amount task) add-amount),
+            })
+        )
+
+        ;; Emit event
+        (print {
+            event: "reward-increased",
+            id: id,
+            added: add-amount,
+            new-total: (+ (get amount task) add-amount),
         })
 
         (ok true)
