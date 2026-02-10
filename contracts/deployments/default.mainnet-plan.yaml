@@ -1,0 +1,18 @@
+---
+id: 0
+name: Mainnet deployment
+network: mainnet
+stacks-node: "https://api.hiro.so"
+bitcoin-node: "http://blockstack:blockstacksystem@bitcoin.blockstack.com:8332"
+plan:
+  batches:
+    - id: 0
+      transactions:
+        - contract-publish:
+            contract-name: bittask
+            expected-sender: SP34HE2KF7SPKB8BD5GY39SG7M207FZPRXJS4NMY9
+            cost: 35560
+            path: contracts/bittask.clar
+            anchor-block-only: true
+            clarity-version: 3
+      epoch: "3.0"

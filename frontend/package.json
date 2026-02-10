@@ -1,0 +1,44 @@
+{
+  "name": "frontend",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@hirosystems/chainhooks-client": "^1.0.0",
+    "@reown/appkit": "^1.8.15",
+    "@reown/appkit-adapter-bitcoin": "^1.8.15",
+    "@stacks/auth": "^7.3.0",
+    "@stacks/common": "^7.0.2",
+    "@stacks/connect": "^8.2.3",
+    "@stacks/network": "^7.3.1",
+    "@stacks/transactions": "^7.3.1",
+    "dotenv": "^17.2.3",
+    "lucide-react": "^0.378.0",
+    "next": "14.2.3",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "sonner": "^1.4.41",
+    "viem": "^2.10.1",
+    "wagmi": "^2.9.2"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3.3.3",
+    "@tailwindcss/postcss": "^4",
+    "@types/dotenv": "^6.1.1",
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "eslint": "^8",
+    "eslint-config-next": "14.2.3",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}
