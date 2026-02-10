@@ -376,33 +376,11 @@
     )
 )
 
-;; Admin / Oracle Functions
+(define-constant ERR-ORACLE-ONLY (err u115))
+(define-constant ERR-ALREADY-DISPUTED (err u116))
+(define-constant ERR-NOT-DISPUTED (err u117))
 
-;; @desc Update the trusted oracle address (Owner only)
-(define-public (set-oracle (new-oracle principal))
-    (begin
-        ;; Logic for contract-owner check omitted for simplicity in this expander, assuming owner is deployer for now
-        (asserts! (is-eq tx-sender (var-get oracle-address)) ERR-UNAUTHORIZED)
-        (var-set oracle-address new-oracle)
-        (ok true)
-    )
-)
-
-;; @desc Oracle-based validation of task completion
-;; @param task-id: The ID of the task to validate
-;; @param external-data-hash: Proof from external source
-(define-public (oracle-validate-task (task-id uint) (external-data-hash (buff 32)))
-    (let (
-        (task (unwrap! (map-get? Tasks task-id) ERR-INVALID-ID))
-    )
-        (asserts! (is-eq tx-sender (var-get oracle-address)) ERR-ORACLE-ONLY)
-        (asserts! (is-eq (get status task) "submitted") ERR-NOT-SUBMITTED)
-        
-        (map-set Tasks task-id (merge task { status: "validated" }))
-        (print { action: "oracle-validation", id: task-id, proof: external-data-hash })
-        (ok true)
-    )
-)
+;; Data Variables
 
 (define-read-only (get-tasks (id-list (list 200 uint)))
     (map get-task id-list)
