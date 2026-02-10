@@ -554,11 +554,10 @@
     )
 )
 
-(define-constant ERR-ORACLE-ONLY (err u115))
-(define-constant ERR-ALREADY-DISPUTED (err u116))
-(define-constant ERR-NOT-DISPUTED (err u117))
 
-;; Data Variables
+(define-read-only (get-milestone (task-id uint) (milestone-id uint))
+    (map-get? Milestones { task-id: task-id, milestone-id: milestone-id })
+)
 
 (define-read-only (get-tasks (id-list (list 200 uint)))
     (map get-task id-list)
