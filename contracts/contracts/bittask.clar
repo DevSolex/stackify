@@ -412,6 +412,54 @@
     )
 )
 
+;; @desc Resolve a disputed task (Oracle only)
+;; @param id uint - Task ID
+;; @param worker-payout uint - Amount to pay the worker
+;; @param creator-refund uint - Amount to refund the creator
+(define-public (resolve-dispute (id uint) (worker-payout uint) (creator-refund uint))
+    (let ((task (unwrap! (map-get? Tasks id) ERR-INVALID-ID)))
+        ;; Check that sender is the oracle
+        (asserts! (is-eq tx-sender (var-get oracle-address)) ERR-ORACLE-ONLY)
+
+        ;; Check that task is disputed
+        (asserts! (is-eq (get status task) "disputed") ERR-NOT-DISPUTED)
+
+        ;; Check that total resolve amount equals task amount
+        (asserts! (is-eq (+ worker-payout creator-refund) (get amount task)) ERR-ZERO-AMOUNT)
+
+        ;; Update task status to completed
+        (map-set Tasks id
+            (merge task {
+                status: "completed",
+            })
+        )
+
+        ;; Transfer STX to worker (if any)
+        (if (> worker-payout u0)
+            (let ((worker-principal (unwrap! (get worker task) ERR-NOT-WORKER)))
+                (try! (as-contract (stx-transfer? worker-payout tx-sender worker-principal)))
+            )
+            true
+        )
+
+        ;; Transfer STX to creator (if any)
+        (if (> creator-refund u0)
+            (try! (as-contract (stx-transfer? creator-refund tx-sender (get creator task))))
+            true
+        )
+
+        ;; Emit event
+        (print {
+            event: "dispute-resolved",
+            id: id,
+            worker-payout: worker-payout,
+            creator-refund: creator-refund,
+        })
+
+        (ok true)
+    )
+)
+
 ;; @desc Add a milestone to a task
 ;; @param task-id uint - Task ID
 ;; @param milestone-id uint - Milestone ID (sequential for task)
