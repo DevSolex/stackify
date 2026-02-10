@@ -269,6 +269,47 @@
         ;; Refund STX from contract back to creator
         (try! (as-contract (stx-transfer? (get amount task) tx-sender (get creator task))))
 
+        ;; Emit event
+        (print {
+            event: "reclaimed",
+            id: id,
+            creator: tx-sender,
+            amount: (get amount task),
+            reason: "expired",
+        })
+
+        (ok true)
+    )
+)
+
+;; @desc Extend the deadline of a task
+;; @param id uint - Task ID
+;; @param new-deadline uint - New block height for the deadline
+(define-public (extend-deadline (id uint) (new-deadline uint))
+    (let ((task (unwrap! (map-get? Tasks id) ERR-INVALID-ID)))
+        ;; Check that sender is the creator
+        (asserts! (is-eq tx-sender (get creator task)) ERR-NOT-CREATOR)
+
+        ;; Check that task is not completed or disputed (simplified)
+        (asserts! (not (is-eq (get status task) "completed")) ERR-ALREADY-COMPLETED)
+
+        ;; Check that new deadline is further than current deadline
+        (asserts! (> new-deadline (get deadline task)) ERR-PAST-DEADLINE)
+
+        ;; Update task
+        (map-set Tasks id
+            (merge task {
+                deadline: new-deadline,
+            })
+        )
+
+        ;; Emit event
+        (print {
+            event: "deadline-extended",
+            id: id,
+            new-deadline: new-deadline,
+        })
+
         (ok true)
     )
 )
