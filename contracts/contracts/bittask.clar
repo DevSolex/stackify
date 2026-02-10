@@ -381,6 +381,37 @@
     )
 )
 
+;; @desc Flag a task as disputed
+;; @param id uint - Task ID
+(define-public (dispute-task (id uint))
+    (let ((task (unwrap! (map-get? Tasks id) ERR-INVALID-ID)))
+        ;; Check that sender is either creator or worker
+        (asserts! (or (is-eq tx-sender (get creator task)) (is-eq (some tx-sender) (get worker task))) ERR-UNAUTHORIZED)
+
+        ;; Check that task is not already completed
+        (asserts! (not (is-eq (get status task) "completed")) ERR-ALREADY-COMPLETED)
+
+        ;; Check that task is not already disputed
+        (asserts! (not (is-eq (get status task) "disputed")) ERR-ALREADY-DISPUTED)
+
+        ;; Update task status to disputed
+        (map-set Tasks id
+            (merge task {
+                status: "disputed",
+            })
+        )
+
+        ;; Emit event
+        (print {
+            event: "disputed",
+            id: id,
+            disputer: tx-sender,
+        })
+
+        (ok true)
+    )
+)
+
 ;; @desc Add a milestone to a task
 ;; @param task-id uint - Task ID
 ;; @param milestone-id uint - Milestone ID (sequential for task)
