@@ -269,13 +269,36 @@
         ;; Refund STX from contract back to creator
         (try! (as-contract (stx-transfer? (get amount task) tx-sender (get creator task))))
 
+        (ok true)
+    )
+)
+
+;; @desc Cancel an open task and reclaim funds
+;; @param id uint - Task ID
+(define-public (cancel-task (id uint))
+    (let ((task (unwrap! (map-get? Tasks id) ERR-INVALID-ID)))
+        ;; Check that sender is the creator
+        (asserts! (is-eq tx-sender (get creator task)) ERR-NOT-CREATOR)
+
+        ;; Check that task is open
+        (asserts! (is-eq (get status task) "open") ERR-NOT-OPEN)
+
+        ;; Update task status to completed (prevents further actions)
+        (map-set Tasks id
+            (merge task {
+                status: "completed",
+            })
+        )
+
+        ;; Refund STX from contract back to creator
+        (try! (as-contract (stx-transfer? (get amount task) tx-sender (get creator task))))
+
         ;; Emit event
         (print {
-            event: "reclaimed",
+            event: "cancelled",
             id: id,
             creator: tx-sender,
             amount: (get amount task),
-            reason: "expired",
         })
 
         (ok true)
