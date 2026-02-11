@@ -12,6 +12,7 @@
  * - Reown WalletKit - For wallet developers
  */
 
+import { WalletProviderRegistry, WalletDetector } from './abstraction';
 export { WalletProviderRegistry, WalletDetector, STACKS_NETWORKS } from './abstraction';
 export type {
   WalletProvider,
@@ -30,15 +31,15 @@ export { ReownAppKitProvider, ReownWalletKitProvider } from './reown-provider';
  */
 export function createWalletRegistry() {
   const registry = new WalletProviderRegistry();
-  
+
   // Register Stacks Connect provider (current implementation)
   const stacksProvider = new StacksConnectProvider();
   registry.register('stacks-connect', stacksProvider);
-  
+
   // Register Reown AppKit provider (future support)
   const reownProvider = new ReownAppKitProvider();
   registry.register('reown-appkit', reownProvider);
-  
+
   // Auto-detect and set recommended provider
   const recommended = WalletDetector.getRecommendedProvider();
   if (recommended && registry.getAvailableProviders().includes(recommended)) {
@@ -47,7 +48,7 @@ export function createWalletRegistry() {
     // Fallback to Stacks Connect
     registry.setProvider('stacks-connect');
   }
-  
+
   return registry;
 }
 

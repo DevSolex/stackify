@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { Card, CardHeader, CardTitle, CardContent, CardDescription, CardFooter } from './ui/Card';
 import { Button } from './ui/Button';
 import { Badge } from './ui/Badge';
-import { Progress } from './ui/progress';
+import { Progress } from './ui/Progress';
 import { Vote, Users, FileText, CheckCircle2, XCircle, Timer, ExternalLink } from 'lucide-react';
 import { toast } from 'sonner';
 

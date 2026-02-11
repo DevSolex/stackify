@@ -3,7 +3,6 @@ import {
     broadcastTransaction,
     AnchorMode,
     PostConditionMode,
-    getNonce,
     getAddressFromPrivateKey,
 } from '@stacks/transactions';
 import { STACKS_MAINNET, STACKS_TESTNET } from '@stacks/network';
@@ -62,7 +61,7 @@ async function deployToken() {
         console.log(`Transaction created.`);
 
         // broadcastTransaction expects { transaction } in some versions
-        const broadcastResponse = await broadcastTransaction({ transaction });
+        const broadcastResponse = await broadcastTransaction({ transaction }) as any;
 
         if (broadcastResponse.error) {
             console.error(`FAILED to broadcast deployment:`, broadcastResponse.error);

@@ -84,7 +84,7 @@ export default function TaskDetailPage() {
 
         setIsActionLoading(true);
         try {
-            await acceptTask(userSession, taskId, {
+            await acceptTask(userSession as any, taskId, {
                 onFinish: async (data) => {
                     showNotification.success('Task accepted!', 'You are now assigned to this task');
                     await reloadTask();
@@ -109,7 +109,7 @@ export default function TaskDetailPage() {
 
         setIsActionLoading(true);
         try {
-            await submitWork(userSession, taskId, submissionText.trim(), {
+            await submitWork(userSession as any, taskId, submissionText.trim(), {
                 onTransactionId: (txId) => {
                     addTransaction({
                         txId,
@@ -140,7 +140,7 @@ export default function TaskDetailPage() {
     const handleApproveWork = async () => {
         setIsActionLoading(true);
         try {
-            await approveWork(userSession, taskId, {
+            await approveWork(userSession as any, taskId, {
                 onTransactionId: (txId) => {
                     addTransaction({
                         txId,
@@ -173,7 +173,7 @@ export default function TaskDetailPage() {
 
         setIsActionLoading(true);
         try {
-            await rejectWork(userSession, taskId, {
+            await rejectWork(userSession as any, taskId, {
                 onTransactionId: (txId) => {
                     addTransaction({
                         txId,
@@ -206,7 +206,7 @@ export default function TaskDetailPage() {
 
         setIsActionLoading(true);
         try {
-            await reclaimExpired(userSession, taskId, {
+            await reclaimExpired(userSession as any, taskId, {
                 onTransactionId: (txId) => {
                     addTransaction({
                         txId,

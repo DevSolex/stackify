@@ -1,8 +1,8 @@
 import { openContractCall } from '@stacks/connect';
 import { UserSession } from '@stacks/auth';
 import { STACKS_MAINNET, STACKS_TESTNET } from '@stacks/network';
-import { uintCV, stringAsciiCV, principalCV, FungibleConditionCode } from '@stacks/transactions';
-import { createSTXPostCondition } from '@stacks/transactions/dist/pc';
+import { uintCV, stringAsciiCV, principalCV, FungibleConditionCode, PostConditionMode } from '@stacks/transactions';
+import { Pc } from '@stacks/transactions';
 
 const CONTRACT_ADDRESS = 'SP34HE2KF7SPKB8BD5GY39SG7M207FZPRXJS4NMY9';
 const CONTRACT_NAME = 'bittask';
@@ -33,11 +33,7 @@ export async function createTask(
 
     // Create post-condition to ensure only the specified amount is transferred
     const postConditions = [
-      createSTXPostCondition(
-        'tx-sender',
-        FungibleConditionCode.Equal,
-        amountMicroSTX
-      ),
+      Pc.principal('tx-sender').willSendEq(amountMicroSTX).ustx(),
     ];
 
     await openContractCall({
@@ -53,9 +49,9 @@ export async function createTask(
       network,
       postConditions,
       userSession: userSession as any,
-      onFinish: (data) => {
+      onFinish: (data: any) => {
         console.log('Task created:', data);
-        const txId = data?.txId || data?.txid || data?.response?.txid || data?.stacksTransaction?.txid();
+        const txId = data.txId || data.txid || data.response?.txid || data.stacksTransaction?.txid();
         if (txId && options?.onTransactionId) {
           options.onTransactionId(txId);
         }
@@ -84,10 +80,10 @@ export async function acceptTask(
       functionName: 'accept-task',
       functionArgs: [uintCV(taskId)],
       network,
-      userSession,
-      onFinish: (data) => {
+      userSession: userSession as any,
+      onFinish: (data: any) => {
         console.log('Task accepted:', data);
-        const txId = data?.txId || data?.txid || data?.response?.txid || data?.stacksTransaction?.txid();
+        const txId = data.txId || data.txid || data.response?.txid || data.stacksTransaction?.txid();
         if (txId && options?.onTransactionId) {
           options.onTransactionId(txId);
         }
@@ -120,10 +116,10 @@ export async function submitWork(
         stringAsciiCV(submission),
       ],
       network,
-      userSession,
-      onFinish: (data) => {
+      userSession: userSession as any,
+      onFinish: (data: any) => {
         console.log('Work submitted:', data);
-        const txId = data?.txId || data?.txid || data?.response?.txid || data?.stacksTransaction?.txid();
+        const txId = data.txId || data.txid || data.response?.txid || data.stacksTransaction?.txid();
         if (txId && options?.onTransactionId) {
           options.onTransactionId(txId);
         }
@@ -152,10 +148,10 @@ export async function approveWork(
       functionName: 'approve-work',
       functionArgs: [uintCV(taskId)],
       network,
-      userSession,
-      onFinish: (data) => {
+      userSession: userSession as any,
+      onFinish: (data: any) => {
         console.log('Work approved:', data);
-        const txId = data?.txId || data?.txid || data?.response?.txid || data?.stacksTransaction?.txid();
+        const txId = data.txId || data.txid || data.response?.txid || data.stacksTransaction?.txid();
         if (txId && options?.onTransactionId) {
           options.onTransactionId(txId);
         }
@@ -184,10 +180,10 @@ export async function rejectWork(
       functionName: 'reject-work',
       functionArgs: [uintCV(taskId)],
       network,
-      userSession,
-      onFinish: (data) => {
+      userSession: userSession as any,
+      onFinish: (data: any) => {
         console.log('Work rejected:', data);
-        const txId = data?.txId || data?.txid || data?.response?.txid || data?.stacksTransaction?.txid();
+        const txId = data.txId || data.txid || data.response?.txid || data.stacksTransaction?.txid();
         if (txId && options?.onTransactionId) {
           options.onTransactionId(txId);
         }
@@ -216,10 +212,10 @@ export async function reclaimExpired(
       functionName: 'reclaim-expired',
       functionArgs: [uintCV(taskId)],
       network,
-      userSession,
-      onFinish: (data) => {
+      userSession: userSession as any,
+      onFinish: (data: any) => {
         console.log('Funds reclaimed:', data);
-        const txId = data?.txId || data?.txid || data?.response?.txid || data?.stacksTransaction?.txid();
+        const txId = data.txId || data.txid || data.response?.txid || data.stacksTransaction?.txid();
         if (txId && options?.onTransactionId) {
           options.onTransactionId(txId);
         }
@@ -254,10 +250,10 @@ export async function registerReferrer(
         principalCV(referrer),
       ],
       network,
-      userSession,
-      onFinish: (data) => {
+      userSession: userSession as any,
+      onFinish: (data: any) => {
         console.log('Referrer registered:', data);
-        const txId = data?.txId || data?.txid || data?.response?.txid || data?.stacksTransaction?.txid();
+        const txId = data.txId || data.txid || data.response?.txid || data.stacksTransaction?.txid();
         if (txId && options?.onTransactionId) {
           options.onTransactionId(txId);
         }

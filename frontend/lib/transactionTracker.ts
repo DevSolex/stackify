@@ -14,7 +14,7 @@ export interface Transaction {
 }
 
 const network = process.env.NEXT_PUBLIC_STACKS_NETWORK === 'mainnet' ? STACKS_MAINNET : STACKS_TESTNET;
-const API_URL = network.coreApiUrl;
+const API_URL = network === STACKS_MAINNET ? 'https://api.stacks.co' : 'https://api.testnet.stacks.co';
 
 // Store transactions in localStorage for persistence
 const STORAGE_KEY = 'bittask_transactions';

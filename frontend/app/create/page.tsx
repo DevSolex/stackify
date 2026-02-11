@@ -122,7 +122,7 @@ export default function CreateTaskPage() {
 
             // Call create-task contract function
             await createTask(
-                userSession,
+                userSession as any,
                 formData.title.trim(),
                 formData.description.trim(),
                 amount, // Will be converted to micro-STX in contractActions

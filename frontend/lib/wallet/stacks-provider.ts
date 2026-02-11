@@ -23,8 +23,8 @@ export class StacksConnectProvider implements WalletProvider {
   private network: typeof STACKS_MAINNET | typeof STACKS_TESTNET;
 
   constructor() {
-    const networkEnv = process.env.NEXT_PUBLIC_STACKS_NETWORK === 'mainnet' 
-      ? STACKS_MAINNET 
+    const networkEnv = process.env.NEXT_PUBLIC_STACKS_NETWORK === 'mainnet'
+      ? STACKS_MAINNET
       : STACKS_TESTNET;
     this.network = networkEnv;
 
@@ -56,11 +56,11 @@ export class StacksConnectProvider implements WalletProvider {
         onFinish: () => {
           if (this.userSession.isUserSignedIn()) {
             const userData = this.userSession.loadUserData();
-            const address = userData.profile?.stxAddress?.mainnet || 
-                          userData.profile?.stxAddress?.testnet || '';
-            
-            const networkInfo = this.network === STACKS_MAINNET 
-              ? STACKS_NETWORKS.mainnet 
+            const address = userData.profile?.stxAddress?.mainnet ||
+              userData.profile?.stxAddress?.testnet || '';
+
+            const networkInfo = this.network === STACKS_MAINNET
+              ? STACKS_NETWORKS.mainnet
               : STACKS_NETWORKS.testnet;
 
             resolve({
@@ -90,15 +90,15 @@ export class StacksConnectProvider implements WalletProvider {
     }
 
     const userData = this.userSession.loadUserData();
-    const address = userData.profile?.stxAddress?.mainnet || 
-                    userData.profile?.stxAddress?.testnet || '';
+    const address = userData.profile?.stxAddress?.mainnet ||
+      userData.profile?.stxAddress?.testnet || '';
 
     if (!address) {
       return null;
     }
 
-    const networkInfo = this.network === STACKS_MAINNET 
-      ? STACKS_NETWORKS.mainnet 
+    const networkInfo = this.network === STACKS_MAINNET
+      ? STACKS_NETWORKS.mainnet
       : STACKS_NETWORKS.testnet;
 
     return {
@@ -117,10 +117,10 @@ export class StacksConnectProvider implements WalletProvider {
         postConditions: request.postConditions,
         network: this.network,
         userSession: this.userSession,
-        onFinish: (data) => {
-          const txId = data?.txId || data?.txid || data?.response?.txid || 
-                      data?.stacksTransaction?.txid();
-          
+        onFinish: (data: any) => {
+          const txId = data.txId || data.txid || data.response?.txid ||
+            data.stacksTransaction?.txid();
+
           if (txId) {
             resolve({
               txId,
@@ -138,8 +138,8 @@ export class StacksConnectProvider implements WalletProvider {
   }
 
   async getNetwork(): Promise<NetworkInfo> {
-    return this.network === STACKS_MAINNET 
-      ? STACKS_NETWORKS.mainnet 
+    return this.network === STACKS_MAINNET
+      ? STACKS_NETWORKS.mainnet
       : STACKS_NETWORKS.testnet;
   }
 
