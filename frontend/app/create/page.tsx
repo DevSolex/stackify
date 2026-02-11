@@ -36,15 +36,15 @@ export default function CreateTaskPage() {
 
     if (!isConnected) {
         return (
-            <div className="min-h-screen bg-gray-950 text-white p-8">
+            <div className="min-h-screen bg-zinc-950 text-white p-8">
                 <div className="max-w-2xl mx-auto">
-                    <Link href="/" className="flex items-center gap-2 text-indigo-400 hover:text-indigo-300 mb-8 w-fit">
+                    <Link href="/" className="flex items-center gap-2 text-violet-400 hover:text-violet-300 mb-8 w-fit">
                         <ArrowLeft className="h-5 w-5" />
                         Back Home
                     </Link>
-                    <div className="text-center py-24 bg-gray-900 rounded-2xl border border-gray-800">
-                        <h3 className="text-xl font-semibold text-gray-300">Connect Your Wallet</h3>
-                        <p className="text-gray-500 mt-2">You need to connect your wallet to create a task</p>
+                    <div className="text-center py-24 bg-zinc-900 rounded-2xl border border-zinc-800">
+                        <h3 className="text-xl font-semibold text-zinc-300">Connect Your Wallet</h3>
+                        <p className="text-zinc-500 mt-2">You need to connect your wallet to create a task</p>
                     </div>
                 </div>
             </div>
@@ -164,19 +164,19 @@ export default function CreateTaskPage() {
     };
 
     return (
-        <div className="min-h-screen bg-gray-950 text-white p-8">
+        <div className="min-h-screen bg-zinc-950 text-white p-8">
             <div className="max-w-2xl mx-auto space-y-8">
-                <Link href="/" className="flex items-center gap-2 text-indigo-400 hover:text-indigo-300 w-fit">
+                <Link href="/" className="flex items-center gap-2 text-violet-400 hover:text-violet-300 w-fit">
                     <ArrowLeft className="h-5 w-5" />
                     Back Home
                 </Link>
 
                 <div className="space-y-2">
                     <h1 className="text-4xl font-bold">Post a New Task</h1>
-                    <p className="text-gray-400">Create a task and find the perfect worker</p>
+                    <p className="text-zinc-400">Create a task and find the perfect worker</p>
                 </div>
 
-                <Card className="border-gray-800 bg-gray-900 text-white">
+                <Card className="border-zinc-800 bg-zinc-900 text-white">
                     <form onSubmit={handleSubmit}>
                         <CardContent className="space-y-6 pt-6">
                             {/* Title */}
@@ -189,9 +189,9 @@ export default function CreateTaskPage() {
                                     onChange={handleChange}
                                     placeholder="e.g., Design a logo for my startup"
                                     maxLength={50}
-                                    className="bg-gray-800 border-gray-700 text-white placeholder:text-gray-500"
+                                    className="bg-zinc-800 border-zinc-700 text-white placeholder:text-zinc-500"
                                 />
-                                <p className="text-xs text-gray-500 text-right">{formData.title.length}/50</p>
+                                <p className="text-xs text-zinc-500 text-right">{formData.title.length}/50</p>
                             </div>
 
                             {/* Description */}
@@ -205,9 +205,9 @@ export default function CreateTaskPage() {
                                     placeholder="Describe what you need done in detail..."
                                     maxLength={256}
                                     rows={5}
-                                    className="bg-gray-800 border-gray-700 text-white placeholder:text-gray-500 resize-none"
+                                    className="bg-zinc-800 border-zinc-700 text-white placeholder:text-zinc-500 resize-none"
                                 />
-                                <p className="text-xs text-gray-500 text-right">{formData.description.length}/256</p>
+                                <p className="text-xs text-zinc-500 text-right">{formData.description.length}/256</p>
                             </div>
 
                             {/* Amount */}
@@ -222,9 +222,9 @@ export default function CreateTaskPage() {
                                     placeholder="e.g., 100"
                                     min="1"
                                     step="1"
-                                    className="bg-gray-800 border-gray-700 text-white placeholder:text-gray-500"
+                                    className="bg-zinc-800 border-zinc-700 text-white placeholder:text-zinc-500"
                                 />
-                                <p className="text-xs text-gray-500">This amount will be locked in escrow</p>
+                                <p className="text-xs text-zinc-500">This amount will be locked in escrow</p>
                             </div>
 
                             {/* Deadline */}
@@ -236,9 +236,9 @@ export default function CreateTaskPage() {
                                     name="deadline"
                                     value={formData.deadline}
                                     onChange={handleChange}
-                                    className="bg-gray-800 border-gray-700 text-white"
+                                    className="bg-zinc-800 border-zinc-700 text-white"
                                 />
-                                <p className="text-xs text-gray-500">When should this task be completed?</p>
+                                <p className="text-xs text-zinc-500">When should this task be completed?</p>
                             </div>
                         </CardContent>
 
@@ -257,8 +257,8 @@ export default function CreateTaskPage() {
                 </Card>
 
                 {/* Info Box */}
-                <div className="bg-indigo-500/10 border border-indigo-500/30 rounded-lg p-4">
-                    <p className="text-sm text-indigo-300">
+                <div className="bg-violet-500/10 border border-violet-500/30 rounded-lg p-4">
+                    <p className="text-sm text-violet-300">
                         💡 <strong>Tip:</strong> Set a reasonable deadline and reward to attract quality workers. Your funds will be held in escrow until you approve the work.
                     </p>
                 </div>

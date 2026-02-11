@@ -86,7 +86,7 @@ export default function Leaderboard() {
                         </thead>
                         <tbody className="divide-y divide-white/5">
                             {LEADERBOARD_DATA.map((entry) => (
-                                <tr key={entry.user} className={`group hover:bg-white/5 transition-colors ${entry.isCurrentUser ? 'bg-indigo-500/10' : ''}`}>
+                                <tr key={entry.user} className={`group hover:bg-white/5 transition-colors ${entry.isCurrentUser ? 'bg-violet-500/10' : ''}`}>
                                     <td className="px-6 py-5 font-mono text-lg font-bold">
                                         {entry.rank === 1 ? '🥇' : entry.rank === 2 ? '🥈' : entry.rank === 3 ? '🥉' : entry.rank}
                                     </td>
@@ -96,8 +96,8 @@ export default function Leaderboard() {
                                                 <AvatarFallback className="bg-white/10 text-xs">{entry.user.slice(0, 2).toUpperCase()}</AvatarFallback>
                                             </Avatar>
                                             <div>
-                                                <div className="font-semibold text-white group-hover:text-indigo-400 transition-colors">
-                                                    {entry.user} {entry.isCurrentUser && <span className="text-[10px] ml-2 bg-indigo-500 px-1.5 py-0.5 rounded uppercase">You</span>}
+                                                <div className="font-semibold text-white group-hover:text-violet-400 transition-colors">
+                                                    {entry.user} {entry.isCurrentUser && <span className="text-[10px] ml-2 bg-violet-500 px-1.5 py-0.5 rounded uppercase">You</span>}
                                                 </div>
                                                 <div className="text-xs text-muted-foreground">{entry.badge} Level</div>
                                             </div>
@@ -126,7 +126,7 @@ export default function Leaderboard() {
             </Card>
 
             <div className="flex justify-center mt-4">
-                <Button variant="ghost" className="text-indigo-400 hover:text-indigo-300 hover:bg-transparent flex items-center gap-2">
+                <Button variant="ghost" className="text-violet-400 hover:text-violet-300 hover:bg-transparent flex items-center gap-2">
                     View Complete Standings <TrendingUp className="w-4 h-4" />
                 </Button>
             </div>

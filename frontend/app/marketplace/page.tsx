@@ -69,19 +69,19 @@ export default function MarketplacePage() {
     ];
 
     return (
-        <div className="min-h-screen bg-gray-950 text-white p-8">
+        <div className="min-h-screen bg-zinc-950 text-white p-8">
             <div className="max-w-7xl mx-auto space-y-8">
                 {/* Header */}
                 <div className="flex flex-col gap-6">
                     <div>
                         <h1 className="text-3xl font-bold">Marketplace</h1>
-                        <p className="text-gray-400">Explore and pick up microgigs</p>
+                        <p className="text-zinc-400">Explore and pick up microgigs</p>
                     </div>
 
                     {/* Search Bar */}
                     <div className="relative">
                         <div className="relative">
-                            <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-500" />
+                            <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-zinc-500" />
                             <input
                                 type="text"
                                 placeholder="Search tasks by title or description..."
@@ -90,12 +90,12 @@ export default function MarketplacePage() {
                                     setSearchQuery(e.target.value);
                                     setCurrentPage(1);
                                 }}
-                                className="w-full pl-12 pr-12 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-indigo-500 transition-colors"
+                                className="w-full pl-12 pr-12 py-3 bg-zinc-900 border border-zinc-700 rounded-lg text-white placeholder-zinc-500 focus:outline-none focus:border-violet-500 transition-colors"
                             />
                             {searchQuery && (
                                 <button
                                     onClick={handleClearSearch}
-                                    className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-300 transition-colors"
+                                    className="absolute right-4 top-1/2 transform -translate-y-1/2 text-zinc-500 hover:text-zinc-300 transition-colors"
                                 >
                                     <X className="h-5 w-5" />
                                 </button>
@@ -121,7 +121,7 @@ export default function MarketplacePage() {
 
                 {/* Results Info */}
                 {!isLoading && (
-                    <div className="text-sm text-gray-400">
+                    <div className="text-sm text-zinc-400">
                         Showing {paginatedTasks.length > 0 ? (currentPage - 1) * itemsPerPage + 1 : 0} to{' '}
                         {Math.min(currentPage * itemsPerPage, filteredTasks.length)} of {filteredTasks.length} tasks
                     </div>
@@ -130,12 +130,12 @@ export default function MarketplacePage() {
                 {/* Tasks Grid */}
                 {isLoading ? (
                     <div className="flex justify-center items-center h-64">
-                        <Loader2 className="h-8 w-8 animate-spin text-indigo-500" />
+                        <Loader2 className="h-8 w-8 animate-spin text-violet-500" />
                     </div>
                 ) : paginatedTasks.length === 0 ? (
-                    <div className="text-center py-24 bg-gray-900 rounded-2xl border border-gray-800">
-                        <h3 className="text-xl font-semibold text-gray-300">No tasks found</h3>
-                        <p className="text-gray-500 mt-2">
+                    <div className="text-center py-24 bg-zinc-900 rounded-2xl border border-zinc-800">
+                        <h3 className="text-xl font-semibold text-zinc-300">No tasks found</h3>
+                        <p className="text-zinc-500 mt-2">
                             {searchQuery || statusFilter !== 'all'
                                 ? 'Try adjusting your search or filters'
                                 : 'Be the first to post a task!'}

@@ -44,7 +44,7 @@ export default function ProposalCreator() {
 
             <div className="flex gap-2 mb-8">
                 {[1, 2, 3].map((s) => (
-                    <div key={s} className={`h-1.5 flex-1 rounded-full transition-all duration-500 ${step >= s ? 'bg-indigo-500' : 'bg-white/10'}`} />
+                    <div key={s} className={`h-1.5 flex-1 rounded-full transition-all duration-500 ${step >= s ? 'bg-violet-500' : 'bg-white/10'}`} />
                 ))}
             </div>
 
@@ -52,22 +52,22 @@ export default function ProposalCreator() {
                 <Card className="bg-white/5 border-white/10 backdrop-blur-xl">
                     <CardHeader>
                         <CardTitle className="text-xl flex items-center gap-2">
-                            <Info className="w-5 h-5 text-indigo-400" /> Basic Information
+                            <Info className="w-5 h-5 text-violet-400" /> Basic Information
                         </CardTitle>
                     </CardHeader>
                     <CardContent className="space-y-6">
                         <div className="space-y-2">
-                            <label className="text-sm font-semibold uppercase tracking-wider text-indigo-300">Proposal Title</label>
+                            <label className="text-sm font-semibold uppercase tracking-wider text-violet-300">Proposal Title</label>
                             <Input
                                 placeholder="e.g., Expansion of BTK Utility"
-                                className="bg-black/50 border-white/10 h-12 text-lg focus:ring-indigo-500"
+                                className="bg-black/50 border-white/10 h-12 text-lg focus:ring-violet-500"
                                 value={formData.title}
                                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, title: e.target.value })}
                             />
                         </div>
                         <div className="space-y-2">
-                            <label className="text-sm font-semibold uppercase tracking-wider text-indigo-300">Category</label>
-                            <select className="w-full h-12 bg-black/50 border-white/10 rounded-md px-3 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                            <label className="text-sm font-semibold uppercase tracking-wider text-violet-300">Category</label>
+                            <select className="w-full h-12 bg-black/50 border-white/10 rounded-md px-3 text-white focus:outline-none focus:ring-2 focus:ring-violet-500">
                                 <option>Protocol Improvement</option>
                                 <option>Treasury Allocation</option>
                                 <option>Community Grant</option>
@@ -76,7 +76,7 @@ export default function ProposalCreator() {
                         </div>
                     </CardContent>
                     <CardFooter>
-                        <Button onClick={handleNext} className="w-full bg-indigo-600 hover:bg-indigo-700">
+                        <Button onClick={handleNext} className="w-full bg-violet-600 hover:bg-violet-700">
                             Continue to Details <ArrowRight className="w-4 h-4 ml-2" />
                         </Button>
                     </CardFooter>
@@ -87,21 +87,21 @@ export default function ProposalCreator() {
                 <Card className="bg-white/5 border-white/10 backdrop-blur-xl">
                     <CardHeader>
                         <CardTitle className="text-xl flex items-center gap-2">
-                            <Settings className="w-5 h-5 text-indigo-400" /> Proposal Details
+                            <Settings className="w-5 h-5 text-violet-400" /> Proposal Details
                         </CardTitle>
                     </CardHeader>
                     <CardContent className="space-y-6">
                         <div className="space-y-2">
-                            <label className="text-sm font-semibold uppercase tracking-wider text-indigo-300">Full Description</label>
+                            <label className="text-sm font-semibold uppercase tracking-wider text-violet-300">Full Description</label>
                             <Textarea
                                 placeholder="Describe your proposal in detail..."
-                                className="min-h-[200px] bg-black/50 border-white/10 focus:ring-indigo-500"
+                                className="min-h-[200px] bg-black/50 border-white/10 focus:ring-violet-500"
                                 value={formData.description}
                                 onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setFormData({ ...formData, description: e.target.value })}
                             />
                         </div>
                         <div className="space-y-2">
-                            <label className="text-sm font-semibold uppercase tracking-wider text-indigo-300">External Discussion (Optional)</label>
+                            <label className="text-sm font-semibold uppercase tracking-wider text-violet-300">External Discussion (Optional)</label>
                             <Input
                                 placeholder="https://forum.bittask.org/..."
                                 className="bg-black/50 border-white/10"
@@ -111,7 +111,7 @@ export default function ProposalCreator() {
                         </div>
                     </CardContent>
                     <CardFooter>
-                        <Button onClick={handleNext} className="w-full bg-indigo-600 hover:bg-indigo-700">
+                        <Button onClick={handleNext} className="w-full bg-violet-600 hover:bg-violet-700">
                             Preview Proposal <ArrowRight className="w-4 h-4 ml-2" />
                         </Button>
                     </CardFooter>
@@ -119,7 +119,7 @@ export default function ProposalCreator() {
             )}
 
             {step === 3 && (
-                <Card className="bg-gradient-to-br from-indigo-950/30 to-background border-indigo-500/20 shadow-2xl">
+                <Card className="bg-gradient-to-br from-violet-950/30 to-background border-violet-500/20 shadow-2xl">
                     <CardHeader>
                         <CardTitle className="text-xl flex items-center gap-2 font-mono">
                             <CheckSquare className="w-5 h-5 text-emerald-400" /> REVIEW SUBMISSION
@@ -128,11 +128,11 @@ export default function ProposalCreator() {
                     <CardContent className="space-y-6">
                         <div className="p-4 rounded-lg bg-black/40 border border-white/5 space-y-4">
                             <div>
-                                <span className="text-xs font-bold text-indigo-400 uppercase">Title</span>
+                                <span className="text-xs font-bold text-violet-400 uppercase">Title</span>
                                 <p className="text-xl font-bold">{formData.title}</p>
                             </div>
                             <div>
-                                <span className="text-xs font-bold text-indigo-400 uppercase">Description Preview</span>
+                                <span className="text-xs font-bold text-violet-400 uppercase">Description Preview</span>
                                 <p className="text-muted-foreground italic text-sm line-clamp-3">"{formData.description}"</p>
                             </div>
                         </div>

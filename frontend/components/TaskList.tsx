@@ -13,7 +13,7 @@ export function TaskList({ tasks, isLoading }: TaskListProps) {
     if (isLoading) {
         return (
             <div className="flex justify-center items-center h-64">
-                <Loader2 className="h-8 w-8 animate-spin text-indigo-500" />
+                <Loader2 className="h-8 w-8 animate-spin text-violet-500" />
             </div>
         );
     }

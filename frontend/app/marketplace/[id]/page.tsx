@@ -252,23 +252,23 @@ export default function TaskDetailPage() {
 
     if (isLoading) {
         return (
-            <div className="min-h-screen bg-gray-950 text-white p-8 flex justify-center items-center">
-                <Loader2 className="h-8 w-8 animate-spin text-indigo-500" />
+            <div className="min-h-screen bg-zinc-950 text-white p-8 flex justify-center items-center">
+                <Loader2 className="h-8 w-8 animate-spin text-violet-500" />
             </div>
         );
     }
 
     if (error || !task) {
         return (
-            <div className="min-h-screen bg-gray-950 text-white p-8">
+            <div className="min-h-screen bg-zinc-950 text-white p-8">
                 <div className="max-w-4xl mx-auto">
-                    <Link href="/marketplace" className="flex items-center gap-2 text-indigo-400 hover:text-indigo-300 mb-8">
+                    <Link href="/marketplace" className="flex items-center gap-2 text-violet-400 hover:text-violet-300 mb-8">
                         <ArrowLeft className="h-5 w-5" />
                         Back to Marketplace
                     </Link>
-                    <div className="text-center py-24 bg-gray-900 rounded-2xl border border-gray-800">
+                    <div className="text-center py-24 bg-zinc-900 rounded-2xl border border-zinc-800">
                         <AlertCircle className="h-12 w-12 text-red-400 mx-auto mb-4" />
-                        <h3 className="text-xl font-semibold text-gray-300">{error || 'Task not found'}</h3>
+                        <h3 className="text-xl font-semibold text-zinc-300">{error || 'Task not found'}</h3>
                     </div>
                 </div>
             </div>
@@ -281,42 +281,42 @@ export default function TaskDetailPage() {
         'in-progress': 'bg-yellow-500/10 text-yellow-400',
         'submitted': 'bg-blue-500/10 text-blue-400',
         'completed': 'bg-purple-500/10 text-purple-400',
-    }[task.status] || 'bg-gray-700 text-gray-400';
+    }[task.status] || 'bg-zinc-700 text-zinc-400';
 
     return (
-        <div className="min-h-screen bg-gray-950 text-white p-8">
+        <div className="min-h-screen bg-zinc-950 text-white p-8">
             <div className="max-w-4xl mx-auto space-y-8">
                 {/* Back Button */}
-                <Link href="/marketplace" className="flex items-center gap-2 text-indigo-400 hover:text-indigo-300 w-fit">
+                <Link href="/marketplace" className="flex items-center gap-2 text-violet-400 hover:text-violet-300 w-fit">
                     <ArrowLeft className="h-5 w-5" />
                     Back to Marketplace
                 </Link>
 
                 {/* Task Header */}
-                <div className="bg-gray-900 border border-gray-800 rounded-2xl p-8 space-y-6">
+                <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-8 space-y-6">
                     <div className="flex justify-between items-start gap-4">
                         <div className="flex-1">
                             <div className="flex items-center gap-3 mb-4">
                                 <span className={`px-3 py-1 rounded-full text-sm font-medium ${statusColor}`}>
                                     {task.status.toUpperCase()}
                                 </span>
-                                <span className="text-gray-500 text-sm">ID: #{task.id}</span>
+                                <span className="text-zinc-500 text-sm">ID: #{task.id}</span>
                             </div>
                             <h1 className="text-4xl font-bold mb-2">{task.title}</h1>
-                            <p className="text-gray-400 text-lg">{task.description}</p>
+                            <p className="text-zinc-400 text-lg">{task.description}</p>
                         </div>
                     </div>
 
                     {/* Task Info Grid */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-6 border-t border-gray-800">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-6 border-t border-zinc-800">
                         {/* Reward */}
                         <div className="flex items-start gap-4">
-                            <div className="p-3 bg-indigo-500/10 rounded-lg">
-                                <DollarSign className="h-6 w-6 text-indigo-400" />
+                            <div className="p-3 bg-violet-500/10 rounded-lg">
+                                <DollarSign className="h-6 w-6 text-violet-400" />
                             </div>
                             <div>
-                                <p className="text-gray-500 text-sm">Reward</p>
-                                <p className="text-2xl font-bold text-indigo-400">{task.amount} STX</p>
+                                <p className="text-zinc-500 text-sm">Reward</p>
+                                <p className="text-2xl font-bold text-violet-400">{task.amount} STX</p>
                             </div>
                         </div>
 
@@ -326,7 +326,7 @@ export default function TaskDetailPage() {
                                 <Clock className="h-6 w-6 text-orange-400" />
                             </div>
                             <div>
-                                <p className="text-gray-500 text-sm">Deadline</p>
+                                <p className="text-zinc-500 text-sm">Deadline</p>
                                 <p className={`text-lg font-semibold ${isExpired ? 'text-red-400' : 'text-white'}`}>
                                     {safeDate(task.deadline)}
                                 </p>
@@ -340,8 +340,8 @@ export default function TaskDetailPage() {
                                 <User className="h-6 w-6 text-cyan-400" />
                             </div>
                             <div>
-                                <p className="text-gray-500 text-sm">Creator</p>
-                                <p className="text-sm font-mono text-gray-300 break-all">{task.creator}</p>
+                                <p className="text-zinc-500 text-sm">Creator</p>
+                                <p className="text-sm font-mono text-zinc-300 break-all">{task.creator}</p>
                             </div>
                         </div>
 
@@ -352,8 +352,8 @@ export default function TaskDetailPage() {
                                     <CheckCircle className="h-6 w-6 text-purple-400" />
                                 </div>
                                 <div>
-                                    <p className="text-gray-500 text-sm">Assigned Worker</p>
-                                    <p className="text-sm font-mono text-gray-300 break-all">{task.worker}</p>
+                                    <p className="text-zinc-500 text-sm">Assigned Worker</p>
+                                    <p className="text-sm font-mono text-zinc-300 break-all">{task.worker}</p>
                                 </div>
                             </div>
                         )}
@@ -361,12 +361,12 @@ export default function TaskDetailPage() {
                 </div>
 
                 {/* Action Buttons */}
-                <div className="bg-gray-900 border border-gray-800 rounded-2xl p-8 space-y-4">
+                <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-8 space-y-4">
                     <h2 className="text-xl font-bold mb-4">Actions</h2>
 
                     {!isConnected && (
-                        <div className="text-center py-4 bg-gray-800 rounded-lg">
-                            <p className="text-gray-400">Connect your wallet to interact with tasks</p>
+                        <div className="text-center py-4 bg-zinc-800 rounded-lg">
+                            <p className="text-zinc-400">Connect your wallet to interact with tasks</p>
                         </div>
                     )}
 
@@ -374,7 +374,7 @@ export default function TaskDetailPage() {
                         <button
                             onClick={handleAcceptTask}
                             disabled={isActionLoading || task.creator === address}
-                            className="w-full py-3 px-6 bg-indigo-600 hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed rounded-lg font-semibold transition-colors flex items-center justify-center gap-2"
+                            className="w-full py-3 px-6 bg-violet-600 hover:bg-violet-700 disabled:opacity-50 disabled:cursor-not-allowed rounded-lg font-semibold transition-colors flex items-center justify-center gap-2"
                         >
                             {isActionLoading && <Loader2 className="h-5 w-5 animate-spin" />}
                             {task.creator === address ? 'You created this task' : 'Accept Task'}
@@ -413,50 +413,50 @@ export default function TaskDetailPage() {
                     )}
 
                     {task.status === 'completed' && (
-                        <div className="text-center py-6 bg-gray-800 rounded-lg">
+                        <div className="text-center py-6 bg-zinc-800 rounded-lg">
                             <CheckCircle className="h-8 w-8 text-green-400 mx-auto mb-2" />
-                            <p className="text-gray-300">This task has been completed</p>
+                            <p className="text-zinc-300">This task has been completed</p>
                         </div>
                     )}
 
                     {isExpired && task.status === 'open' && (
-                        <div className="text-center py-6 bg-gray-800 rounded-lg">
+                        <div className="text-center py-6 bg-zinc-800 rounded-lg">
                             <AlertCircle className="h-8 w-8 text-red-400 mx-auto mb-2" />
-                            <p className="text-gray-300">This task has expired</p>
+                            <p className="text-zinc-300">This task has expired</p>
                         </div>
                     )}
                 </div>
 
                 {/* Task Timeline */}
-                <div className="bg-gray-900 border border-gray-800 rounded-2xl p-8">
+                <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-8">
                     <h2 className="text-xl font-bold mb-6">Task Status</h2>
                     <div className="space-y-4">
                         <div className="flex items-center gap-4">
                             <div className="w-3 h-3 bg-green-400 rounded-full"></div>
                             <div>
                                 <p className="font-semibold">Created</p>
-                                <p className="text-gray-500 text-sm">Task posted on blockchain</p>
+                                <p className="text-zinc-500 text-sm">Task posted on blockchain</p>
                             </div>
                         </div>
                         <div className={`flex items-center gap-4 ${task.status !== 'open' ? 'opacity-100' : 'opacity-50'}`}>
-                            <div className={`w-3 h-3 rounded-full ${task.status !== 'open' ? 'bg-yellow-400' : 'bg-gray-600'}`}></div>
+                            <div className={`w-3 h-3 rounded-full ${task.status !== 'open' ? 'bg-yellow-400' : 'bg-zinc-600'}`}></div>
                             <div>
                                 <p className="font-semibold">In Progress</p>
-                                <p className="text-gray-500 text-sm">Worker accepted the task</p>
+                                <p className="text-zinc-500 text-sm">Worker accepted the task</p>
                             </div>
                         </div>
                         <div className={`flex items-center gap-4 ${['submitted', 'completed'].includes(task.status) ? 'opacity-100' : 'opacity-50'}`}>
-                            <div className={`w-3 h-3 rounded-full ${['submitted', 'completed'].includes(task.status) ? 'bg-blue-400' : 'bg-gray-600'}`}></div>
+                            <div className={`w-3 h-3 rounded-full ${['submitted', 'completed'].includes(task.status) ? 'bg-blue-400' : 'bg-zinc-600'}`}></div>
                             <div>
                                 <p className="font-semibold">Submitted</p>
-                                <p className="text-gray-500 text-sm">Worker submitted proof of work</p>
+                                <p className="text-zinc-500 text-sm">Worker submitted proof of work</p>
                             </div>
                         </div>
                         <div className={`flex items-center gap-4 ${task.status === 'completed' ? 'opacity-100' : 'opacity-50'}`}>
-                            <div className={`w-3 h-3 rounded-full ${task.status === 'completed' ? 'bg-purple-400' : 'bg-gray-600'}`}></div>
+                            <div className={`w-3 h-3 rounded-full ${task.status === 'completed' ? 'bg-purple-400' : 'bg-zinc-600'}`}></div>
                             <div>
                                 <p className="font-semibold">Completed</p>
-                                <p className="text-gray-500 text-sm">Creator approved and funds released</p>
+                                <p className="text-zinc-500 text-sm">Creator approved and funds released</p>
                             </div>
                         </div>
                     </div>
@@ -465,9 +465,9 @@ export default function TaskDetailPage() {
                 {/* Submit Work Modal */}
                 {showSubmitModal && (
                     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-                        <div className="bg-gray-900 border border-gray-800 rounded-2xl p-8 max-w-md w-full space-y-4">
+                        <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-8 max-w-md w-full space-y-4">
                             <h3 className="text-2xl font-bold">Submit Work</h3>
-                            <p className="text-gray-400 text-sm">
+                            <p className="text-zinc-400 text-sm">
                                 Provide a link, hash, or description of your completed work
                             </p>
                             <textarea
@@ -476,9 +476,9 @@ export default function TaskDetailPage() {
                                 placeholder="e.g., https://example.com/work or IPFS hash..."
                                 maxLength={256}
                                 rows={4}
-                                className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-indigo-500 transition-colors resize-none"
+                                className="w-full px-4 py-3 bg-zinc-800 border border-zinc-700 rounded-lg text-white placeholder-zinc-500 focus:outline-none focus:border-violet-500 transition-colors resize-none"
                             />
-                            <p className="text-xs text-gray-500">{submissionText.length}/256</p>
+                            <p className="text-xs text-zinc-500">{submissionText.length}/256</p>
                             <div className="flex gap-3">
                                 <button
                                     onClick={() => {
@@ -486,7 +486,7 @@ export default function TaskDetailPage() {
                                         setSubmissionText('');
                                     }}
                                     disabled={isActionLoading}
-                                    className="flex-1 py-3 px-6 bg-gray-800 hover:bg-gray-700 disabled:opacity-50 rounded-lg font-semibold transition-colors"
+                                    className="flex-1 py-3 px-6 bg-zinc-800 hover:bg-zinc-700 disabled:opacity-50 rounded-lg font-semibold transition-colors"
                                 >
                                     Cancel
                                 </button>

@@ -51,23 +51,23 @@ export default function StakingDashboard() {
         <div className="space-y-6 p-6 max-w-4xl mx-auto animate-in fade-in duration-500">
             <div className="flex items-center justify-between">
                 <div>
-                    <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-400 to-indigo-500 bg-clip-text text-transparent">
+                    <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-400 to-violet-500 bg-clip-text text-transparent">
                         Staking Mastery
                     </h1>
                     <p className="text-muted-foreground mt-1 text-lg">
                         Lock your BTK tokens to earn passive rewards and increase your governance weight.
                     </p>
                 </div>
-                <div className="bg-indigo-500/10 p-3 rounded-2xl border border-indigo-500/20">
-                    <TrendingUp className="text-indigo-400 w-8 h-8" />
+                <div className="bg-violet-500/10 p-3 rounded-2xl border border-violet-500/20">
+                    <TrendingUp className="text-violet-400 w-8 h-8" />
                 </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <Card className="bg-gradient-to-br from-background to-indigo-950/20 border-indigo-500/20 shadow-xl shadow-indigo-500/5">
+                <Card className="bg-gradient-to-br from-background to-violet-950/20 border-violet-500/20 shadow-xl shadow-violet-500/5">
                     <CardHeader className="pb-2">
                         <CardDescription className="flex items-center gap-2">
-                            <Lock className="w-4 h-4 text-indigo-400" />
+                            <Lock className="w-4 h-4 text-violet-400" />
                             Total Staked
                         </CardDescription>
                         <CardTitle className="text-3xl font-mono">
@@ -102,9 +102,9 @@ export default function StakingDashboard() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-4">
-                <Card className="border-indigo-500/10 bg-black/40 backdrop-blur-sm relative overflow-hidden group">
+                <Card className="border-violet-500/10 bg-black/40 backdrop-blur-sm relative overflow-hidden group">
                     <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-                        <ArrowUpRight className="w-24 h-24 text-indigo-500" />
+                        <ArrowUpRight className="w-24 h-24 text-violet-500" />
                     </div>
                     <CardHeader>
                         <CardTitle>Stake BTK</CardTitle>
@@ -119,13 +119,13 @@ export default function StakingDashboard() {
                                     placeholder="0.00"
                                     value={stakeAmount}
                                     onChange={(e) => setStakeAmount(e.target.value)}
-                                    className="pl-10 h-12 bg-white/5 border-white/10 focus:border-indigo-500/50 transition-all text-lg font-mono"
+                                    className="pl-10 h-12 bg-white/5 border-white/10 focus:border-violet-500/50 transition-all text-lg font-mono"
                                 />
                                 <Coins className="absolute left-3 top-3.5 w-5 h-5 text-muted-foreground" />
                             </div>
                         </div>
                         <Button
-                            className="w-full h-12 text-lg bg-indigo-600 hover:bg-indigo-700 shadow-lg shadow-indigo-600/20"
+                            className="w-full h-12 text-lg bg-violet-600 hover:bg-violet-700 shadow-lg shadow-violet-600/20"
                             onClick={handleStake}
                             disabled={loading || !isConnected}
                         >
