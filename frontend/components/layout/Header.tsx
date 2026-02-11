@@ -21,6 +21,15 @@ export function Header() {
                     <span className="text-xl font-bold tracking-tight text-slate-900 dark:text-slate-50">BitTask</span>
                 </Link>
 
+                <nav className="hidden md:flex items-center gap-6">
+                    <Link href="/marketplace" className="text-sm font-medium text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-50 transition-colors">
+                        Marketplace
+                    </Link>
+                    <Link href="/referral" className="text-sm font-medium text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-50 transition-colors">
+                        Referrals
+                    </Link>
+                </nav>
+
                 <div className="flex items-center gap-4">
                     {isLoading ? (
                         <Loader2 className="h-5 w-5 animate-spin text-slate-400" />
