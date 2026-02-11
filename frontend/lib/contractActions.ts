@@ -6,7 +6,7 @@ import { Pc } from '@stacks/transactions';
 
 const CONTRACT_ADDRESS = 'SP34HE2KF7SPKB8BD5GY39SG7M207FZPRXJS4NMY9';
 const CONTRACT_NAME = 'bittask';
-const REFERRAL_CONTRACT_NAME = 'referral-system';
+const REFERRAL_CONTRACT_NAME = 'referral-system'; // Ensure this matches actual deployment name if different from file name
 
 // Use testnet for development, mainnet for production
 const network = process.env.NEXT_PUBLIC_STACKS_NETWORK === 'mainnet' ? STACKS_MAINNET : STACKS_TESTNET;
@@ -266,6 +266,38 @@ export async function registerReferrer(
     });
   } catch (error) {
     console.error('Error registering referrer:', error);
+    throw error;
+  }
+}
+
+
+export async function claimRewards(
+  userSession: UserSession,
+  options?: ContractCallOptions
+): Promise<void> {
+  try {
+    await openContractCall({
+      contractAddress: CONTRACT_ADDRESS,
+      contractName: REFERRAL_CONTRACT_NAME,
+      functionName: 'claim-rewards',
+      functionArgs: [],
+      network,
+      userSession: userSession as any,
+      onFinish: (data: any) => {
+        console.log('Rewards claimed:', data);
+        const txId = data.txId || data.txid || data.response?.txid || data.stacksTransaction?.txid();
+        if (txId && options?.onTransactionId) {
+          options.onTransactionId(txId);
+        }
+        options?.onFinish?.(data);
+      },
+      onCancel: () => {
+        console.log('Transaction cancelled');
+        options?.onCancel?.();
+      },
+    });
+  } catch (error) {
+    console.error('Error claiming rewards:', error);
     throw error;
   }
 }

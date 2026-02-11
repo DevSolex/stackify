@@ -1,5 +1,5 @@
 import { STACKS_MAINNET } from '@stacks/network';
-import { fetchCallReadOnlyFunction, cvToValue, uintCV } from '@stacks/transactions';
+import { fetchCallReadOnlyFunction, cvToValue, uintCV, principalCV } from '@stacks/transactions';
 
 const network = STACKS_MAINNET;
 const CONTRACT_ADDRESS = 'SP34HE2KF7SPKB8BD5GY39SG7M207FZPRXJS4NMY9';
@@ -124,6 +124,77 @@ export async function fetchTask(id: number): Promise<Task | null> {
         };
     } catch (e) {
         console.error(`Error fetching task ${id}`, e);
+        return null;
+    }
+}
+
+export interface ReferralStats {
+    totalReferrals: number;
+    totalPoints: number;
+    multiplier: number;
+    lastActivity: number;
+}
+
+export async function fetchReferralStats(address: string): Promise<ReferralStats> {
+    try {
+        const result = await fetchCallReadOnlyFunction({
+            contractAddress: CONTRACT_ADDRESS,
+            contractName: 'referral-system',
+            functionName: 'get-stats',
+            functionArgs: [principalCV(address)],
+            senderAddress: CONTRACT_ADDRESS,
+            network,
+        });
+
+        const stats = cvToValue(result);
+        if (!stats) {
+            return {
+                totalReferrals: 0,
+                totalPoints: 0,
+                multiplier: 10000,
+                lastActivity: 0
+            };
+        }
+
+        // Helper to safely get value (handle potential nesting/wrapping)
+        const getValue = (val: any) => {
+            if (!val) return 0;
+            if (val.value !== undefined) return Number(val.value);
+            return Number(val);
+        };
+
+        return {
+            totalReferrals: getValue(stats['total-referrals']),
+            totalPoints: getValue(stats['total-points']),
+            multiplier: getValue(stats['multiplier']),
+            lastActivity: getValue(stats['last-activity']),
+        };
+    } catch (e) {
+        console.error("Error fetching referral stats", e);
+        return {
+            totalReferrals: 0,
+            totalPoints: 0,
+            multiplier: 10000,
+            lastActivity: 0
+        };
+    }
+}
+
+export async function fetchReferrer(address: string): Promise<string | null> {
+    try {
+        const result = await fetchCallReadOnlyFunction({
+            contractAddress: CONTRACT_ADDRESS,
+            contractName: 'referral-system',
+            functionName: 'get-referrer',
+            functionArgs: [principalCV(address)],
+            senderAddress: CONTRACT_ADDRESS,
+            network,
+        });
+
+        // Result is (optional principal)
+        return cvToValue(result); // Returns string principal or null
+    } catch (e) {
+        console.error("Error fetching referrer", e);
         return null;
     }
 }
